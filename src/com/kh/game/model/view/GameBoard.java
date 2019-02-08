@@ -33,12 +33,17 @@ public class GameBoard extends JPanel{
 		int y = 0;
 
 		//버튼 마다 setBounds()를 통해서 위치와 크기를 설정해 주어야지 화면에 나온다.
-		for(int i = 0; i < obj.length; i++) {
-			String str = new Integer((int)obj[i]).toString();
-			JButton btn = new JButton(str);
-			btn.setBounds(x, y, 40, 40);
-			x += 40; y += 40;
-			this.add(btn);
+		for(int i = 0; i < 10; i++) {
+			x = 0;
+			for(int j = 0; j < 10; j++) {
+				String str = new Integer((int)obj[i]).toString();
+				JButton btn = new JButton(str);
+				btn.setBounds(x, y, 40, 40);
+				x += 40;
+				this.add(btn);
+			}
+			y+=40;
+			
 		}
 		
 		gp.add(GameBoard);
