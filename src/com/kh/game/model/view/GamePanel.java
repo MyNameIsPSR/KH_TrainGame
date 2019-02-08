@@ -87,7 +87,7 @@ public class GamePanel extends JPanel{
 
 		munjae.setLineWrap(true);
 		munjae.setFont(new Font("±¼¸²Ã¼", Font.PLAIN, 16));
-
+		munjae.setBounds(400, 0, 400, 400);
 		JScrollPane scroller = new JScrollPane(munjae, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		scroller.setSize(400, 400);
