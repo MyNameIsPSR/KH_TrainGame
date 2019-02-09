@@ -20,6 +20,7 @@ import com.kh.game.model.view.MainFrame;
 import com.kh.game.model.view.Munjae1;
 import com.kh.game.model.view.Munjae2;
 import com.kh.game.model.view.Munjae3;
+import com.kh.game.model.view.TimeLimiter;
 
 public class DifferenceSpot extends JPanel{
 	private JPanel ds = this;
@@ -36,12 +37,14 @@ public class DifferenceSpot extends JPanel{
 	private int life = 3;
 	private ImageIcon icon = null;
 	private JPanel panel2;
+	private JPanel timer;
 	private JButton button;
 	private JButton button2;
 	private JButton npc;
 	
 	public DifferenceSpot(MainFrame mf) {
 		CustomMouseAdapter cma = new CustomMouseAdapter();
+		timer = new TimeLimiter(5, this);
 		this.mf = mf;
 		int random = (int)(Math.random()*3)+1;
 		if(random == 1) {
@@ -68,7 +71,7 @@ public class DifferenceSpot extends JPanel{
 		title.setSize(120, 70);
 
 		result = new JLabel("게임 진행중...");
-		result.setLocation(400, 450);
+		result.setLocation(400, 500);
 		result.setSize(120, 70);
 		
 		munjae = new JLabel(icon);
@@ -104,7 +107,7 @@ public class DifferenceSpot extends JPanel{
 		button2.setVisible(false);
 		
 		
-		
+		this.add(timer);
 		this.add(panel2);
 		this.add(npc);
 		this.setSize(900, 600);
@@ -179,7 +182,7 @@ public class DifferenceSpot extends JPanel{
 				result.setText("정답입니다!!");
 			}else {
 				life--;
-				
+				result.setText("틀렸습니다...");
 			}
 			
 			if(spot1 == true && spot2 == true && spot3 == true) {
@@ -196,6 +199,10 @@ public class DifferenceSpot extends JPanel{
 			System.out.println("X : " + e.getX() + " Y : " + e.getY());
 		}
 		
+	}
+	
+	public JButton getButton2() {
+		return button2;
 	}
 
 }
