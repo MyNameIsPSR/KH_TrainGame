@@ -16,10 +16,12 @@ import javax.swing.JTextField;
 public class OXPlay extends JPanel{
 	private MainFrame mf;
 	private JPanel oxPlay;
+	private Player p;
 	 
-	public OXPlay(MainFrame mf) {
+	public OXPlay(MainFrame mf, Player p) {
 		this.mf = mf;
 		this.oxPlay = this;
+		this.p = p;
 
 		this.setLayout(null);
 		this.setBounds(0, 0, 900, 600);
@@ -57,7 +59,7 @@ public class OXPlay extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("X버튼 클릭");
 				ChangePanel.changePanel(mf, oxPlay, 
-						new OXResult(mf));
+						new OXResult(mf, p));
 			}
 		});
 		

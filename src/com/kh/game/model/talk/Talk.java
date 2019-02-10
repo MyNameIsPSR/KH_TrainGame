@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import com.kh.game.model.gameMain.GameMain;
 import com.kh.game.model.view.ChangePanel;
 import com.kh.game.model.view.MainFrame;
+import com.kh.game.model.view.Player;
 
  
 public class Talk extends JPanel{ 
@@ -17,7 +18,7 @@ public class Talk extends JPanel{
 	private MainFrame mf;
 	private JPanel mainPage;
 
-	public Talk(MainFrame mf) {
+	public Talk(MainFrame mf, Player p) {
 		this.mf = mf;
 		this.mainPage = this; 
 	
@@ -60,7 +61,7 @@ public class Talk extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				ChangePanel.changePanel(mf, mainPage, 
 						new GameMain(mf, "OX퀴즈", 
-								"images/test.jpg", "설명"));
+								"images/test.jpg", "설명", p));
 			}
 		});
 		

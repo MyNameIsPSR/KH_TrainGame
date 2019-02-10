@@ -15,6 +15,7 @@ import com.kh.game.model.view.ChangePanel;
 import com.kh.game.model.view.CrossPanel;
 import com.kh.game.model.view.DescripDlg;
 import com.kh.game.model.view.MainFrame;
+import com.kh.game.model.view.Player;
  
 public class GameMain2 extends JPanel implements ActionListener{
 	private MainFrame mf;
@@ -24,14 +25,17 @@ public class GameMain2 extends JPanel implements ActionListener{
 	private String imgAdd;
 	private String description;
 	private JButton[] btnGame = new JButton[3];
+	private Player p;
+	private GameMain2 gm2 = this;
 	
-	public GameMain2(MainFrame mf, String title, String imgAdd, String description) {
+	public GameMain2(MainFrame mf, String title, String imgAdd, String description, Player p) {
 		///초기화
 		this.mf = mf;
 		this.gameMain = this;
 		this.title = title;
 		this.imgAdd = imgAdd;
 		this.description = description;
+		this.p = p;
 		
 		//메인 패널 설정
 		this.setLayout(null);
@@ -82,12 +86,12 @@ public class GameMain2 extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnGame[0]) {
 			ChangePanel.changePanel(mf, gameMain, 
-					new Talk2(mf));
+					new Talk2(mf, gm2.p));
 		} else if(e.getSource() == btnGame[1]) {
 			new DescripDlg(mf, title, description);
 		} else if(e.getSource() == btnGame[2]) {
 			ChangePanel.changePanel(mf, gameMain, 
-					new CrossPanel(mf));
+					new CrossPanel(mf, gm2.p));
 		} //end if
 	} //end method
 

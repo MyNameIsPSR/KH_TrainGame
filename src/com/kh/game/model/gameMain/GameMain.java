@@ -15,6 +15,7 @@ import com.kh.game.model.view.ChangePanel;
 import com.kh.game.model.view.DescripDlg;
 import com.kh.game.model.view.MainFrame;
 import com.kh.game.model.view.OXPlay;
+import com.kh.game.model.view.Player;
  
 public class GameMain extends JPanel implements ActionListener{
 	private MainFrame mf;
@@ -24,14 +25,16 @@ public class GameMain extends JPanel implements ActionListener{
 	private String imgAdd;
 	private String description;
 	private JButton[] btnGame = new JButton[3];
+	private Player p;
 	
-	public GameMain(MainFrame mf, String title, String imgAdd, String description) {
+	public GameMain(MainFrame mf, String title, String imgAdd, String description, Player p) {
 		///초기화
 		this.mf = mf;
 		this.gameMain = this;
 		this.title = title;
 		this.imgAdd = imgAdd;
 		this.description = description;
+		this.p = p;
 		
 		//메인 패널 설정
 		this.setLayout(null);
@@ -82,12 +85,12 @@ public class GameMain extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnGame[0]) {
 			ChangePanel.changePanel(mf, gameMain, 
-					new Talk(mf));
+					new Talk(mf, p));
 		} else if(e.getSource() == btnGame[1]) {
 			new DescripDlg(mf, title, description);
 		} else if(e.getSource() == btnGame[2]) {
 			ChangePanel.changePanel(mf, gameMain, 
-					new OXPlay(mf));
+					new OXPlay(mf, p));
 		} //end if
 	} //end method
 
