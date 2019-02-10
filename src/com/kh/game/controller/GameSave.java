@@ -19,6 +19,7 @@ public class GameSave {
 		//전달받은 플레이어 객체와 전달받은 패널을 저장
 		try(ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("player.dat"));) {
 
+			
 			save.writeObject(p);
 			save.writeObject(panel);
 			save.flush();
