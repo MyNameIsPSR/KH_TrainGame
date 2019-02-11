@@ -45,7 +45,7 @@ public class CrossPanel extends JPanel implements ActionListener{
 
 		this.add(crossword);
 		mf.add(this);
-		new GamePanel(this);
+		new GamePanel(this, new GameBoard());
 	}
 
 	public void setBtnNext(JButton btnNext) { //GamePanel로부터 next버튼을 받아옴
