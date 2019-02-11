@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.kh.game.model.talk.Talk2;
+import com.kh.game.model.talk.Talk;
 
 //OX결과화면(수정 필요!)
 public class OXResult extends JPanel {
@@ -54,7 +54,7 @@ public class OXResult extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				//성공과 실패여부에 따라서 대화내용이 달라야 함
 				ChangePanel.changePanel(mf, oxResult, 
-						new Talk2(mf));
+						new Talk(mf, 2));
 			}
 		});
 		

@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.kh.game.model.talk.Talk3;
+import com.kh.game.model.talk.Talk;
 
 //가로세로낱말퍼즐
 public class CrossPanel extends JPanel implements ActionListener{
@@ -49,7 +49,7 @@ public class CrossPanel extends JPanel implements ActionListener{
 		if(e.getSource() == btnNext) {
 			//성공과 실패시 대화 화면으로 넘어가기(수정필요)
 			ChangePanel.changePanel(mf, SubPanel, 
-					new Talk3(mf));
+					new Talk(mf, 3));
 		}
 	} 
 }

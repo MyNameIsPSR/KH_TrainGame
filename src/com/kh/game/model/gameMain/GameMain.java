@@ -10,8 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.kh.game.controller.DifferenceSpot;
 import com.kh.game.model.talk.Talk;
 import com.kh.game.model.view.ChangePanel;
+import com.kh.game.model.view.CrossPanel;
 import com.kh.game.model.view.DescripDlg;
 import com.kh.game.model.view.MainFrame;
 import com.kh.game.model.view.OXPlay;
@@ -24,14 +26,16 @@ public class GameMain extends JPanel implements ActionListener{
 	private String imgAdd;
 	private String description;
 	private JButton[] btnGame = new JButton[3];
+	private int level;
 	
-	public GameMain(MainFrame mf, String title, String imgAdd, String description) {
+	public GameMain(MainFrame mf, String title, String imgAdd, String description, int level) {
 		///초기화
 		this.mf = mf;
 		this.gameMain = this;
 		this.title = title;
 		this.imgAdd = imgAdd;
 		this.description = description;
+		this.level = level;
 		
 		//메인 패널 설정
 		this.setLayout(null);
@@ -80,15 +84,26 @@ public class GameMain extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource() == btnGame[0]) {
 			ChangePanel.changePanel(mf, gameMain, 
-					new Talk(mf));
+					new Talk(mf, 1));
 		} else if(e.getSource() == btnGame[1]) {
 			new DescripDlg(mf, title, description);
-		} else if(e.getSource() == btnGame[2]) {
-			ChangePanel.changePanel(mf, gameMain, 
-					new OXPlay(mf));
+		} else if(e.getSource() == btnGame[2]) { //게임시작 버튼 눌렀을 때
+			switch(level) {
+			case 1: //OX퀴즈
+				ChangePanel.changePanel(mf, gameMain, new OXPlay(mf));
+				break;
+			case 2: //가로세로낱말퀴즈
+				ChangePanel.changePanel(mf, gameMain, new CrossPanel(mf));
+				break;
+			case 3: //틀린코드 찾기
+				ChangePanel.changePanel(mf, gameMain, new DifferenceSpot(mf));
+				break;
+			} //end switch			
 		} //end if
+		
 	} //end method
 
 } //end class

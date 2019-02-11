@@ -1,6 +1,8 @@
 package com.kh.game.model.view;
 
 import javax.swing.JFrame;
+
+import com.kh.game.model.talk.Talk;
  
 public class MainFrame extends JFrame{
 	
@@ -10,6 +12,8 @@ public class MainFrame extends JFrame{
 		
 		//new CrossPanel(this);
 		new StartPanel(this);
+		
+		//new Talk(this, 1);
 		
 		this.setResizable(false);
 		
