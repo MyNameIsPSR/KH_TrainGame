@@ -10,16 +10,20 @@ import javax.swing.JPanel;
 import com.kh.game.model.gameMain.GameMain3;
 import com.kh.game.model.view.ChangePanel;
 import com.kh.game.model.view.MainFrame;
+import com.kh.game.model.view.Player;
 
  
 public class Talk3 extends JPanel{ 
 	
 	private MainFrame mf;
 	private JPanel mainPage;
+	private Player p;
+	private Talk3 talk3 = this;
 
-	public Talk3(MainFrame mf) {
+	public Talk3(MainFrame mf, Player p) {
 		this.mf = mf;
 		this.mainPage = this; 
+		this.p = p;
 	
 		//1. 메인 패널 크기 설정
 		this.setBounds(0, 0, 900, 600); //위치 및 크기 조절
@@ -61,7 +65,7 @@ public class Talk3 extends JPanel{
 				System.out.println("틀린그림 찾기 대화화면입니다.");
 				ChangePanel.changePanel(mf, mainPage, 
 						new GameMain3(mf, "틀린 코드 찾기", 
-								"images/test.jpg", "설명"));
+								"images/test.jpg", "설명", talk3.p));
 			}
 		});
 		

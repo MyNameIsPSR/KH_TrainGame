@@ -25,14 +25,16 @@ public class GameMain3 extends JPanel implements ActionListener{
 	private String imgAdd;
 	private String description;
 	private JButton[] btnGame = new JButton[3];
+	private Player p;
 	
-	public GameMain3(MainFrame mf, String title, String imgAdd, String description) {
+	public GameMain3(MainFrame mf, String title, String imgAdd, String description, Player p) {
 		///초기화
 		this.mf = mf;
 		this.gameMain = this;
 		this.title = title;
 		this.imgAdd = imgAdd;
 		this.description = description;
+		this.p = p;
 		
 		//메인 패널 설정
 		this.setLayout(null);
@@ -74,14 +76,13 @@ public class GameMain3 extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnGame[0]) {
 			ChangePanel.changePanel(mf, gameMain, 
-					new Talk3(mf));
+					new Talk3(mf, p));
 		} else if(e.getSource() == btnGame[1]) {
 			new DescripDlg(mf, title, description);
 		} else if(e.getSource() == btnGame[2]) {
-			Player p = new Player();
-			new DifferenceSpot(mf);
+			new DifferenceSpot(mf, p);
 			ChangePanel.changePanel(mf, gameMain, 
-					new DifferenceSpot(mf));
+					new DifferenceSpot(mf, p));
 		} //end if
 	} //end method
 

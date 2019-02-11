@@ -16,7 +16,7 @@ public class Prolog extends JPanel{
 	private MainFrame mf;
 	private JPanel prolog; 
 	
-	public Prolog(MainFrame mf) {
+	public Prolog(MainFrame mf, Player p) {
 		this.mf = mf;
 		this.prolog = this;
 		
@@ -42,7 +42,7 @@ public class Prolog extends JPanel{
 					
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ChangePanel.changePanel(mf, prolog, new Talk(mf));
+				ChangePanel.changePanel(mf, prolog, new Talk(mf, p));
 			}
 			
 		});

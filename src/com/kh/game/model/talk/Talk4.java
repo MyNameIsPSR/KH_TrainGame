@@ -10,16 +10,19 @@ import javax.swing.JPanel;
 import com.kh.game.model.view.ChangePanel;
 import com.kh.game.model.view.Ending;
 import com.kh.game.model.view.MainFrame;
+import com.kh.game.model.view.Player;
 
  
 public class Talk4 extends JPanel{ 
 	
 	private MainFrame mf;
 	private JPanel mainPage;
+	private Player p;
 
-	public Talk4(MainFrame mf) {
+	public Talk4(MainFrame mf, Player p) {
 		this.mf = mf;
 		this.mainPage = this; 
+		this.p = p;
 	
 		//1. 메인 패널 크기 설정
 		this.setBounds(0, 0, 900, 600); //위치 및 크기 조절

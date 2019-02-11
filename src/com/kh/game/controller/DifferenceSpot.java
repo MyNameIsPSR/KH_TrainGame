@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +24,8 @@ import com.kh.game.model.view.MainFrame;
 import com.kh.game.model.view.Munjae1;
 import com.kh.game.model.view.Munjae2;
 import com.kh.game.model.view.Munjae3;
+import com.kh.game.model.view.Player;
+import com.kh.game.model.view.TimeLimiter;
 
 public class DifferenceSpot extends JPanel{
 	private JPanel ds = this;
@@ -36,13 +42,19 @@ public class DifferenceSpot extends JPanel{
 	private int life = 3;
 	private ImageIcon icon = null;
 	private JPanel panel2;
+	private JPanel timer;
 	private JButton button;
 	private JButton button2;
 	private JButton npc;
+	private Player p;
+	private DifferenceSpot dif = this;
 	
-	public DifferenceSpot(MainFrame mf) {
+	public DifferenceSpot(MainFrame mf, Player p) {
 		CustomMouseAdapter cma = new CustomMouseAdapter();
+		timer = new TimeLimiter(5, this);
 		this.mf = mf;
+		this.p = p;
+		this.p.setStage(3);
 		int random = (int)(Math.random()*3)+1;
 		if(random == 1) {
 			icon = new ImageIcon("직박구리/문제1.PNG");
@@ -68,7 +80,7 @@ public class DifferenceSpot extends JPanel{
 		title.setSize(120, 70);
 
 		result = new JLabel("게임 진행중...");
-		result.setLocation(400, 450);
+		result.setLocation(400, 500);
 		result.setSize(120, 70);
 		
 		munjae = new JLabel(icon);
@@ -104,7 +116,7 @@ public class DifferenceSpot extends JPanel{
 		button2.setVisible(false);
 		
 		
-		
+		this.add(timer);
 		this.add(panel2);
 		this.add(npc);
 		this.setSize(900, 600);
@@ -121,11 +133,13 @@ public class DifferenceSpot extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				GameSave save = new GameSave();
+				save.save(dif.p, dif);
 				System.out.println("틀린그림찾기 성공! 대화화면으로 넘어갑니다.");
 				mf.getContentPane().removeAll(); //꼭 패널을 다 지워야만 넘어갈까..
 				System.out.println("전부다 지웠습니다.");
 				ChangePanel.changePanel(mf, ds, 
-						new Talk4(mf));
+						new Talk4(mf, dif.p));
 			}
 		});
 		
@@ -134,11 +148,14 @@ public class DifferenceSpot extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				GameSave save = new GameSave();
+				save.save(dif.p, dif);
+				
 				System.out.println("틀린그림찾기 실패! 대화화면으로 넘어갑니다.");
 				mf.getContentPane().removeAll();
 				System.out.println("전부다 지웠습니다.");
 				ChangePanel.changePanel(mf, ds, 
-						new Talk3(mf));
+						new Talk3(mf, dif.p));
 			}
 		});
 		
@@ -179,7 +196,7 @@ public class DifferenceSpot extends JPanel{
 				result.setText("정답입니다!!");
 			}else {
 				life--;
-				
+				result.setText("틀렸습니다...");
 			}
 			
 			if(spot1 == true && spot2 == true && spot3 == true) {
@@ -196,6 +213,10 @@ public class DifferenceSpot extends JPanel{
 			System.out.println("X : " + e.getX() + " Y : " + e.getY());
 		}
 		
+	}
+	
+	public JButton getButton2() {
+		return button2;
 	}
 
 }
