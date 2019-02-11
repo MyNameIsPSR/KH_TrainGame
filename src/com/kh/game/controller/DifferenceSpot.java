@@ -1,6 +1,8 @@
 package com.kh.game.controller;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import com.kh.game.model.talk.Talk3;
 import com.kh.game.model.talk.Talk4;
@@ -34,6 +38,9 @@ public class DifferenceSpot extends JPanel{
 	public static boolean spot3 = false;
 	private JLabel munjae;
 	private JLabel result;
+	private JLabel life1;
+	private JLabel life2;
+	private JLabel life3;
 	private int [] x;
 	private int [] y;
 	private int xRange = 40;
@@ -51,7 +58,7 @@ public class DifferenceSpot extends JPanel{
 	
 	public DifferenceSpot(MainFrame mf, Player p) {
 		CustomMouseAdapter cma = new CustomMouseAdapter();
-		timer = new TimeLimiter(5, this);
+		timer = new TimeLimiter(60, this);
 		this.mf = mf;
 		this.p = p;
 		this.p.setStage(3);
@@ -88,6 +95,33 @@ public class DifferenceSpot extends JPanel{
 		munjae.setSize(600, 350);
 		munjae.addMouseListener(cma);
 		
+		life1 = new JLabel("ㅇ");
+		life1.setSize(20,20);
+		life1.setLocation(800, 20);
+		
+		life2 = new JLabel("ㅇ");
+		life2.setSize(20,20);
+		life2.setLocation(825, 20);
+		
+		life3 = new JLabel("ㅇ");
+		life3.setSize(20,20);
+		life3.setLocation(850, 20);
+		
+		JTextField text = new JTextField();
+		if(random == 1) {
+			text.setText("자동완성에\n너무 익숙해진거 아닌가?");
+		}else if(random == 2) {
+			text.setText("try문과\nwhile문을\n다시공부해봐");
+		}else {
+			text.setText("길이를 아는\n방법은\n여러가지가 있지");
+		}
+		text.setLocation(19, 300);
+		text.setSize(100, 150);
+		text.setVisible(false);
+		text.setEditable(false);
+		
+		
+		
 		npc = new JButton("NPC자리");
 		npc.setSize(100, 100);
 		npc.setLocation(19, 445);
@@ -95,10 +129,8 @@ public class DifferenceSpot extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == npc) {
-					JTextArea text = new JTextArea();
-					text.setText("안녕");
-					text.setLocation(19, 300);
-					ds.add(text);
+					
+					text.setVisible(true);
 					
 				}
 				
@@ -116,6 +148,10 @@ public class DifferenceSpot extends JPanel{
 		button2.setVisible(false);
 		
 		
+		this.add(life1);
+		this.add(life2);
+		this.add(life3);
+		this.add(text);
 		this.add(timer);
 		this.add(panel2);
 		this.add(npc);
@@ -196,13 +232,18 @@ public class DifferenceSpot extends JPanel{
 				result.setText("정답입니다!!");
 			}else {
 				life--;
-				result.setText("틀렸습니다...");
+				if(life == 2) {
+					life1.setVisible(false);
+				}else if(life == 1) {
+					life2.setVisible(false);
+				}else if(life == 0) {
+					life3.setVisible(false);
+				}
 			}
 			
 			if(spot1 == true && spot2 == true && spot3 == true) {
 				button.setVisible(true);
-			}
-			if(life == 0) {
+			}else if(life == 0) {
 				button2.setVisible(true);
 			}
 			

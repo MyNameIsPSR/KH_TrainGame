@@ -1,6 +1,7 @@
 package com.kh.game.model.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,12 +19,14 @@ public class TimeLimiter extends JPanel{
 	public JLabel tLabel = null;
 	public TimeLimiter timer = this;
 
-	public TimeLimiter(int maxTime, DifferenceSpot asd) {
+	public TimeLimiter(int maxTime, DifferenceSpot dif) {
 		this.setBounds(10, 10, 60, 50);
 		tLabel = new JLabel("" + this.maxTime);
 		tLabel.setSize(60, 40);
-		tLabel.setFont(new Font("Gothic", 0, 20));
 		tLabel.setLocation(20, 5);
+		tLabel.setBackground(Color.DARK_GRAY);
+		tLabel.setFont(new Font("Gothic", 0, 20));
+		tLabel.setForeground(Color.RED);
 		
 		timer1 = new Timer(1000, new ActionListener() {
 			@Override
@@ -32,9 +35,11 @@ public class TimeLimiter extends JPanel{
 					tLabel.setText("" +(timer.maxTime--));
 				}else {
 					timer1.stop();
-					asd.getButton2().setVisible(true);
+					dif.getButton2().setVisible(true);
 				}
-
+				if(dif.spot1 == true && dif.spot2 == true && dif.spot3 == true){
+					timer1.stop();
+				}
 			}
 		});
 		
